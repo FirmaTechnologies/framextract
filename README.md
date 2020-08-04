@@ -1,2 +1,2 @@
 # imgextract
-Extract frames from a video
+A CLI library to extract frames from a video
