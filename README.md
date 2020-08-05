@@ -3,18 +3,18 @@ A CLI library to extract frames from a video
 
 ## Installation
 PyPI
-```
-$ pip install frame-extractor
+```bash
+pip install frame-extractor
 ```
 
 ## Usage
 CLI
-```
-$ framextract <inputfile> -o <outputfolder> -f <framerate>
+```bash
+framextract <inputfile> -o <outputfolder> -f <framerate>
 ```
 
 ## Development
-```
+```bash
 bumpversion [major][minor][patch]
 python setup.py sdist bdist_wheel
 twine check dist/*
