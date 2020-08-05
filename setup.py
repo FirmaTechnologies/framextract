@@ -10,14 +10,14 @@ README = (HERE/'README.md').read_text()
 # This call to setup() does all the work
 setup(
     name='frame-extractor',
-    version='0.1.0',
+    version='0.1.2',
     description='Extract frames from a video',
     long_description=README,
     long_description_content_type='text/markdown',
-    url='https://github.com/FirmaTechnologies/imgextract',
+    url='https://github.com/FirmaTechnologies/framextract',
     author='ngchanway',
     author_email='chan_way@firma-tech.com',
-    license='GPLv3',
+    license='GPL-3.0',
     classifiers=[
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Programming Language :: Python :: 3',
