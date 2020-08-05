@@ -1,0 +1,37 @@
+import pathlib
+from setuptools import setup
+
+# The directory containing this file
+HERE = pathlib.Path(__file__).parent
+
+# The text of the README file
+README = (HERE/'README.md').read_text()
+
+# This call to setup() does all the work
+setup(
+    name='frame-extractor',
+    version='0.1.0',
+    description='Extract frames from a video',
+    long_description=README,
+    long_description_content_type='text/markdown',
+    url='https://github.com/FirmaTechnologies/imgextract',
+    author='ngchanway',
+    author_email='chan_way@firma-tech.com',
+    license='GPLv3',
+    classifiers=[
+        'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.7'
+    ],
+    packages=['framextract'],
+    include_package_data=True,
+    install_requires=[
+        'numpy',
+        'opencv-python'
+    ],
+    entry_points={
+        'console_scripts': [
+            'framextract=framextract.__main__:main'
+        ]
+    }
+)
