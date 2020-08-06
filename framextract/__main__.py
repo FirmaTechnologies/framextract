@@ -23,13 +23,15 @@ def main():
     args = parser.parse_args()
 
     video_name = args.input
-    vidcap = cv2.VideoCapture(video_name)
-    print(f'Frame size: {int(vidcap.get(cv2.CAP_PROP_FRAME_WIDTH))}',
-          f'{int(vidcap.get(cv2.CAP_PROP_FRAME_HEIGHT))}')
-    print(f'Frame rate: {1/int(vidcap.get(cv2.CAP_PROP_FPS))}')
-
     frame_folder = args.output if args.output else Path(video_name).stem
     frame_rate = args.framerate
+
+    vidcap = cv2.VideoCapture(video_name)
+    print(video_name)
+    print(f'Frame size: {int(vidcap.get(cv2.CAP_PROP_FRAME_WIDTH))}',
+          f'X {int(vidcap.get(cv2.CAP_PROP_FRAME_HEIGHT))}')
+    print(f'Frame rate: {1/int(vidcap.get(cv2.CAP_PROP_FPS)):.3}')
+
     if not os.path.isdir(frame_folder):
         os.makedirs(frame_folder)
 
@@ -41,6 +43,7 @@ def main():
         if not count%100:
             print(count)
         print('.', end='')
+    print()
     print(f'{count} frames were extracted to {frame_folder}{os.path.sep}')
 
 if __name__ == '__main__':
