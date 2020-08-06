@@ -19,9 +19,10 @@ setup(
     author_email='chan_way@firma-tech.com',
     license='GPL-3.0',
     classifiers=[
+        'Development Status :: 4 - Beta',
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.7'
+        'Topic :: Multimedia :: Video'
     ],
     packages=['framextract'],
     include_package_data=True,

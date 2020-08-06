@@ -14,7 +14,11 @@ framextract <inputfile> -o <outputfolder> -f <framerate>
 ```
 
 ## Development
+MacOS
 ```bash
+python -m venv venv
+source venv/bin/activate
+pip install wheel -r requirements.txt
 bumpversion [major][minor][patch]
 python setup.py sdist bdist_wheel
 twine check dist/*
