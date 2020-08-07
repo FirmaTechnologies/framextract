@@ -12,12 +12,8 @@ jobs:
       - python/install-deps
       - python/save-cache
       - run:
-          command: |
-            pip install -U pytest
-            pytest
+          command: pytest
           name: Test
-      - store_test_results:
-          path: test-results
 
 workflows:
   main:

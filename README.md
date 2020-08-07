@@ -5,19 +5,19 @@ A CLI library to extract frames from a video
 
 ## Installation
 [PyPI](https://pypi.org/project/frame-extractor/)
-```bash
+```zsh
 pip install frame-extractor
 ```
 
 ## Usage
 CLI
-```bash
+```zsh
 framextract <inputfile> -o <outputfolder> -f <framerate>
 ```
 
 ## Development
 MacOS
-```bash
+```zsh
 python -m venv venv
 source venv/bin/activate
 pip install [wheel] -r requirements.txt
@@ -26,4 +26,9 @@ python setup.py sdist [bdist_wheel]
 twine check dist/*
 twine upload --repository-url https://test.pypi.org/legacy/ dist/*
 twine upload dist/*
+```
+
+## Tests
+```zsh
+pytest --durations=3 --cov-report=html --cov=framextract
 ```
