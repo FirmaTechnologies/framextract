@@ -1,5 +1,5 @@
 '''
-usage: framextract <inputfile> -o <outputfolder> -f <framerate>
+usage: framextract <inputfile> --get-info -o <outputfolder> -f <framerate>
 '''
 import cv2, os
 from argparse import ArgumentParser
@@ -18,19 +18,25 @@ def main():
     parser = ArgumentParser(description='Extract frames from a video')
     parser.add_argument('--version', action='version', version='%(prog)s 0.1.2')
     parser.add_argument('input', help='input video')
+    parser.add_argument('--get-info', dest='getinfo', action='store_true',
+                        help='get video frame rate and frame size')
     parser.add_argument('--output', '-o', help='output folder')
     parser.add_argument('--framerate', '-f', type=float, help='frame rate')
     args = parser.parse_args()
 
     video_name = args.input
+    get_info = args.getinfo
     frame_folder = args.output if args.output else Path(video_name).stem
     frame_rate = args.framerate
 
     vidcap = cv2.VideoCapture(video_name)
-    print(video_name)
-    print(f'Frame rate: {1/int(vidcap.get(cv2.CAP_PROP_FPS)):.3}')
-    print(f'Frame size: {int(vidcap.get(cv2.CAP_PROP_FRAME_WIDTH))}',
-          f'X {int(vidcap.get(cv2.CAP_PROP_FRAME_HEIGHT))}')
+
+    if get_info:
+        print(f'{video_name}:')
+        print(f'Frame rate: {1/int(vidcap.get(cv2.CAP_PROP_FPS)):.3}')
+        print(f'Frame size: {int(vidcap.get(cv2.CAP_PROP_FRAME_WIDTH))}',
+              f'X {int(vidcap.get(cv2.CAP_PROP_FRAME_HEIGHT))}')
+        return
 
     if not os.path.isdir(frame_folder):
         os.makedirs(frame_folder)

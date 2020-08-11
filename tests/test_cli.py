@@ -10,7 +10,6 @@ def capture(command):
 def test_framextract_no_param():
     out, err, exitcode = capture(COMMAND)
     assert exitcode != 0
-    assert out == b''
     assert err.startswith(b'usage: framextract [-h] [--version]')
 
 def test_framextract(tmp_path):
@@ -21,13 +20,6 @@ def test_framextract(tmp_path):
     os.chdir(pwd)
     assert exitcode == 0
     assert out.endswith(b'104 frames were extracted to FT/\n')
-
-def test_framextract_invalid_video():
-    command = COMMAND + ['FT.mp4']
-    out, err, exitcode = capture(command)
-    assert exitcode != 0
-    assert out.startswith(b'FT.mp4')
-    assert b"ZeroDivisionError" in err
 
 def test_framextract_output(tmp_path):
     command = COMMAND + ['tests/FT.mp4', '-o', tmp_path/'FT']
@@ -43,3 +35,9 @@ def test_framextract_framerate(tmp_path):
     assert exitcode == 0
     assert out.endswith(f'2 frames were extracted to {tmp_path}/FT/\n'
                         .encode('utf-8'))
+
+def test_framextract_get_info(tmp_path):
+    command = COMMAND + ['tests/FT.mp4', '--get-info']
+    out, err, exitcode = capture(command)
+    assert exitcode == 0
+    assert out.endswith(b'Frame size: 960 X 540\n')
