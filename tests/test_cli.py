@@ -24,18 +24,19 @@ def test_framextract_invalid_video():
     out, err, exitcode = capture(command)
     assert exitcode != 0
     assert out.startswith(b'FT.mp4')
-    # assert b"OpenCV: Couldn't read video stream" in err
+    assert b"ZeroDivisionError" in err
 
-def test_framextract_output():
-    command = COMMAND + ['tests/FT.mp4', '-o', 'tests/FT']
-    out, err, exitcode = capture(command)
+def test_framextract_output(tmpdir):
+    command = COMMAND + ['tests/FT.mp4', '-o', tmpdir/'FT']
+    out, _, exitcode = capture(command)
     assert exitcode == 0
-    assert out.endswith(b'frames were extracted to tests/FT/\n')
-    assert err == b''
+    assert out.endswith(f'frames were extracted to {tmpdir}/FT/\n'
+                        .encode('utf-8'))
 
-def test_framextract_framerate():
-    command = COMMAND + ['tests/FT.mp4', '-f', '4']
-    out, err, exitcode = capture(command)
+def test_framextract_framerate(tmpdir):
+    command = COMMAND + ['tests/FT.mp4', '-f', '4',
+                         '-o', tmpdir/'FT']
+    out, _, exitcode = capture(command)
     assert exitcode == 0
-    assert out.endswith(b'2 frames were extracted to FT/\n')
-    assert err == b''
+    assert out.endswith(f'2 frames were extracted to {tmpdir}/FT/\n'
+                        .encode('utf-8'))

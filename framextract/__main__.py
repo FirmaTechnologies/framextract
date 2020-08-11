@@ -28,9 +28,9 @@ def main():
 
     vidcap = cv2.VideoCapture(video_name)
     print(video_name)
+    print(f'Frame rate: {1/int(vidcap.get(cv2.CAP_PROP_FPS)):.3}')
     print(f'Frame size: {int(vidcap.get(cv2.CAP_PROP_FRAME_WIDTH))}',
           f'X {int(vidcap.get(cv2.CAP_PROP_FRAME_HEIGHT))}')
-    print(f'Frame rate: {1/int(vidcap.get(cv2.CAP_PROP_FPS)):.3}')
 
     if not os.path.isdir(frame_folder):
         os.makedirs(frame_folder)
