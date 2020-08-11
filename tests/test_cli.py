@@ -37,7 +37,7 @@ def test_framextract_framerate(tmp_path):
                         .encode('utf-8'))
 
 def test_framextract_get_info(tmp_path):
-    command = COMMAND + ['tests/FT.mp4', '--get-info']
+    command = COMMAND + ['tests/FT.mp4', '--get-info-only']
     out, err, exitcode = capture(command)
     assert exitcode == 0
     assert out.endswith(b'Frame size: 960 X 540\n')
