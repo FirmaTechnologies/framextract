@@ -16,7 +16,7 @@ def get_frame(vidcap, frame_rate, count, frame_folder):
 
 def main():
     parser = ArgumentParser(description='Extract frames from a video')
-    parser.add_argument('--version', action='version', version='%(prog)s 0.1.2')
+    parser.add_argument('--version', action='version', version='%(prog)s 0.2.0')
     parser.add_argument('input', help='input video')
     parser.add_argument('--get-info-only', dest='getinfo', action='store_true',
                         help='print video frame rate and frame size')
