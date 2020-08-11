@@ -1,4 +1,5 @@
-import pytest, subprocess
+import pytest, subprocess, os
+from pathlib import Path
 
 COMMAND = ['python', 'framextract']
 
@@ -12,30 +13,33 @@ def test_framextract_no_param():
     assert out == b''
     assert err.startswith(b'usage: framextract [-h] [--version]')
 
-def test_framextract():
-    command = COMMAND + ['tests/FT.mp4']
+def test_framextract(tmp_path):
+    pwd = Path().absolute()
+    command = ['python', pwd/'framextract', pwd/'tests/FT.mp4']
+    os.chdir(tmp_path)
     out, err, exitcode = capture(command)
+    os.chdir(pwd)
     assert exitcode == 0
     assert out.endswith(b'104 frames were extracted to FT/\n')
-    assert err == b''
 
 def test_framextract_invalid_video():
     command = COMMAND + ['FT.mp4']
     out, err, exitcode = capture(command)
     assert exitcode != 0
     assert out.startswith(b'FT.mp4')
-    # assert b"OpenCV: Couldn't read video stream" in err
+    assert b"ZeroDivisionError" in err
 
-def test_framextract_output():
-    command = COMMAND + ['tests/FT.mp4', '-o', 'tests/FT']
-    out, err, exitcode = capture(command)
+def test_framextract_output(tmp_path):
+    command = COMMAND + ['tests/FT.mp4', '-o', tmp_path/'FT']
+    out, _, exitcode = capture(command)
     assert exitcode == 0
-    assert out.endswith(b'frames were extracted to tests/FT/\n')
-    assert err == b''
+    assert out.endswith(f'frames were extracted to {tmp_path}/FT/\n'
+                        .encode('utf-8'))
 
-def test_framextract_framerate():
-    command = COMMAND + ['tests/FT.mp4', '-f', '4']
-    out, err, exitcode = capture(command)
+def test_framextract_framerate(tmp_path):
+    command = COMMAND + ['tests/FT.mp4', '-f', '4',
+                         '-o', tmp_path/'FT']
+    out, _, exitcode = capture(command)
     assert exitcode == 0
-    assert out.endswith(b'2 frames were extracted to FT/\n')
-    assert err == b''
+    assert out.endswith(f'2 frames were extracted to {tmp_path}/FT/\n'
+                        .encode('utf-8'))
