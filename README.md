@@ -1,4 +1,4 @@
-# imgextract
+# frame-extractor
 [![CircleCI](https://circleci.com/gh/FirmaTechnologies/framextract.svg?style=shield)](https://circleci.com/gh/FirmaTechnologies/framextract)
 
 A CLI library to extract frames from a video
@@ -12,7 +12,7 @@ pip install frame-extractor
 ## Usage
 CLI
 ```zsh
-framextract <inputfile> -o <outputfolder> -f <framerate>
+framextract <inputfile> --get-info-only -o <outputfolder> -f <framerate>
 ```
 
 ## Development
