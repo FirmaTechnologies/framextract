@@ -16,10 +16,16 @@ def test_framextract(tmp_path):
     pwd = Path().absolute()
     command = [COMMAND[0], pwd/COMMAND[1], pwd/COMMAND[-1]]
     os.chdir(tmp_path)
-    out, err, exitcode = capture(command)
+    out, _, exitcode = capture(command)
     os.chdir(pwd)
     assert exitcode == 0
     assert out.endswith(b'104 frames were extracted to FT/\n')
+
+def test_framextract_invalid_input_video():
+    command = COMMAND[:-1] + ['FT.mp4']
+    out, err, exitcode = capture(command)
+    assert exitcode == 0
+    assert out.endswith(b'Couldn\'t read video stream from file "FT.mp4"\n')
 
 def test_framextract_output_framerate(tmp_path):
     command = COMMAND + ['-o', tmp_path/'FT', '-f', '4']

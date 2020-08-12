@@ -30,13 +30,17 @@ def main():
     frame_folder = args.output if args.output else Path(video_name).stem
 
     vidcap = cv2.VideoCapture(video_name)
-    frame_rate_ori = 1/int(vidcap.get(cv2.CAP_PROP_FPS))
+    try:
+        frame_rate_ori = 1/int(vidcap.get(cv2.CAP_PROP_FPS))
+    except ZeroDivisionError as e:
+        print(f'Couldn\'t read video stream from file "{video_name}"')
+        return e
     frame_rate = args.framerate if (args.framerate and
                                     args.framerate>frame_rate_ori) else None
 
     if get_info:
         print(f'{video_name}:')
-        print(f'Frame rate: {frame_rate_ori:.3}')
+        print(f'Frame rate: {frame_rate_ori:.3} s')
         print(f'Frame size: {int(vidcap.get(cv2.CAP_PROP_FRAME_WIDTH))}',
               f'X {int(vidcap.get(cv2.CAP_PROP_FRAME_HEIGHT))}')
         return
