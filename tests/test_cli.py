@@ -8,12 +8,12 @@ def capture(command):
     return proc.stdout, proc.stderr, proc.returncode
 
 def test_framextract_no_param():
-    out, err, exitcode = capture(COMMAND[:-1])
+    _, err, exitcode = capture(COMMAND[:-1])
     assert exitcode != 0
     assert err.startswith(b'usage: framextract [-h] [--version]')
 
 def test_framextract(tmp_path):
-    pwd = Path().absolute()
+    pwd = Path.cwd()
     command = [COMMAND[0], pwd/COMMAND[1], pwd/COMMAND[-1]]
     os.chdir(tmp_path)
     out, _, exitcode = capture(command)
@@ -23,7 +23,7 @@ def test_framextract(tmp_path):
 
 def test_framextract_invalid_input_video():
     command = COMMAND[:-1] + ['FT.mp4']
-    out, err, exitcode = capture(command)
+    out, _, exitcode = capture(command)
     assert exitcode == 0
     assert out.endswith(b'Couldn\'t read video stream from file "FT.mp4"\n')
 
