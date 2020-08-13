@@ -28,7 +28,7 @@ twine upload --repository-url https://test.pypi.org/legacy/ dist/*
 twine upload dist/*
 ```
 
-## (Tests)[https://test.pypi.org/project/frame-extractor/]
+## [Tests](https://test.pypi.org/project/frame-extractor/)
 ```zsh
 pytest --durations=3 --cov-report=html --cov=framextract
 ```
