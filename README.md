@@ -1,5 +1,6 @@
 # frame-extractor
 [![CircleCI](https://circleci.com/gh/FirmaTechnologies/framextract.svg?style=shield)](https://circleci.com/gh/FirmaTechnologies/framextract)
+![PyPI](https://img.shields.io/pypi/v/frame-extractor)
 
 A CLI library to extract frames from a video
 
@@ -15,7 +16,7 @@ CLI
 framextract <inputfile> --get-info-only -o <outputfolder> -f <framerate>
 ```
 
-## Development
+## [Development](https://realpython.com/certificates/b677c954-49fe-495b-963c-a05f39b6725a/)
 MacOS
 ```zsh
 python -m venv venv
