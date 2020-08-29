@@ -23,6 +23,7 @@ python -m venv venv
 source venv/bin/activate
 pip install [wheel] -r requirements.txt
 bumpversion [--tag] [--commit] [major|minor|patch]
+python setup.py clean --all
 python setup.py sdist [bdist_wheel]
 twine check dist/*
 twine upload --repository-url https://test.pypi.org/legacy/ dist/*
