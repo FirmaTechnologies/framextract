@@ -52,7 +52,7 @@ def main():
     while success:
         count += 1
         success = get_frame(vidcap, frame_rate, count, frame_folder)
-        if not count%50:
+        if not count%100:
             print(count)
         else:
             print('.', end='')
